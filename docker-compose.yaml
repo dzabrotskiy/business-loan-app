@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: frontend
+    image: frontend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run dev
+    ports:
+      - 5173:5173
+    restart: unless-stopped
+  backend:
+    container_name: backend
+    image: backend
+    build:
+      context: .
+      target: production
+      dockerfile: ./server/Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+  decision-engine:
+    container_name: decision-engine
+    image: decision-engine
+    build:
+      context: .
+      target: production
+      dockerfile: ./decision-engine/Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3001:3001
+    restart: unless-stopped
+  myob-server:
+    container_name: myob-server
+    image: myob-server
+    build:
+      context: .
+      target: production
+      dockerfile: ./myob-server/Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3002:3002
+    restart: unless-stopped
+  xero-server:
+    container_name: xero-server
+    image: xero-server
+    build:
+      context: .
+      target: production
+      dockerfile: ./xero-server/Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3003:3003
+    restart: unless-stopped
