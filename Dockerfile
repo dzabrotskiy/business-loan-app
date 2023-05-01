@@ -1,6 +1,6 @@
 FROM node:latest
 WORKDIR /react-vite-app
-EXPOSE 3000
+EXPOSE 5173
 COPY package.json package-lock.json ./
 RUN npm install --silent
 COPY . ./
